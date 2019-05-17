@@ -1,0 +1,10 @@
+?hide_intermediate
+define I = λx. x
+define K = λx. λy. x
+define S = λx. λy. λz. x z (y z)
+define B = λx. λy. λz. x (y z)
+define C = λx. λy. λz. x y z
+define W = λx. λy. x y y
+define U = λx. x x
+alias Omega = U U
+alias Y = λg. (λx. g (x x)) (λx. g (x x))

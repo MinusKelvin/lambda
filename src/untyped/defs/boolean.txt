@@ -1,0 +1,10 @@
+?hide_intermediate
+
+define T = λx. λy. x
+define F = λx. λy. y
+define not = λp. p F T
+define and = λp. λq. p q F
+define or = λp. λq. p T q
+define if_then_else = λp. λf. λg. p f g
+
+define xor = λp. λq. and (not (and p q)) (or p q)

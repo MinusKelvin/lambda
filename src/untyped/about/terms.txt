@@ -1,0 +1,17 @@
+There are 3 kinds of lambda terms:
+* Variables, written '𝑥', where 𝑥 is a variable name.
+* Abstraction, written 'λ𝑥. 𝑒' where 𝑥 is a variable name and 𝑒 is a lambda
+  term. The abstraction binds 𝑥 in 𝑒. Abstraction reaches as far right as
+  possible; 'λx. x y' is the same as 'λx. (x y)', not '(λx. x) y'.
+* Application, written '𝑒₁ 𝑒₂' where 𝑒₁ and 𝑒₂ are both lambda terms.
+  Application is left associative; 'a b c' is the same as '(a b) c', not
+  'a (b c)'.
+
+Variables are considered either free or bound. Given a lambda term 𝑒, a variable
+𝑥 is free in 𝑒 if it is not bound, and 𝑥 is bound in 𝑒 if all occurrences of 𝑥
+appear within abstractions that bind 𝑥.
+
+For example, the variable x is bound in the lambda term 'λx. x' as x only
+appears within the abstraction 'λx. x' which binds it. The variable x is also
+bound in 'λy. y' because x has no occurrences and vacuous truth holds. The
+variable x is free in both 'x' and 'λy. x'.

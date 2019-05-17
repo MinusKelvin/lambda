@@ -1,0 +1,16 @@
+β-reduction is .
+
+The rule for β-reduction as a rewrite rule is:
+  (λx. m) n -> m[x := n]
+where `m[x := n]` denotes substitution of x with n in m, or in rewrite rules:
+  x[x := n] -> n
+  y[x := n] -> y
+  (e1 e2)[x := n] -> e1[x := n] e2[x := n]
+  (λy. e)[x := n] -> λy. e[x := n]
+
+An example of β-reduction:
+             < (λx. λy. y x) λz. z
+intermediate | (λy. y x)[x := λz. z]
+intermediate | λy. (y x)[x := λz. z]
+intermediate | λy. y[x := z] x[x := λz. z]
+β-reduction  > λy. y λz. z

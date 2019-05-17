@@ -1,0 +1,17 @@
+The rule for α-conversion is:
+  (λx. m) -> (λy. m[x := y])
+where `y` does not appear in `m`
+
+An example of α-conversion:
+             < λx. λy. y x
+intermediate | λz. (λy. y x)[x := z]
+intermediate | λz. λy. (y x)[x := z]
+intermediate | λz. λy. y[x := z] x[x := z]
+α-conversion | λz. λy. y z
+
+An example of a case where α-conversion is required to avoid a name collision:
+             < (λx. λy. x) y
+α-conversion | (λx. λz. x) y
+β-reduction  | λz. y
+Without the alpha conversion, this would β-reduce to `λy. y`, which is incorrect
+and not α-equivalent to `λz. y`.

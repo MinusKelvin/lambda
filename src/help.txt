@@ -1,0 +1,12 @@
+Lambda is a collection of interpreters of lambda calculi. We currently support
+the following variants:
+- Untyped lambda calculus (λ)
+
+We plan to support the following variants in the future:
+- Simply-typed lambda calculus (λ→)
+- System F
+
+Use ?help to get interpreter-specific help text.
+Use ?exit or ?quit or ?q to exit.
+Use ?switch [variant] to change the interpreter or list the available variants.
+Use ?defs [set] to load a definition set or list the available definition sets.

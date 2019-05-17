@@ -1,0 +1,8 @@
+[package]
+name = "lambda"
+version = "0.1.0"
+authors = ["MinusKelvin <minuskelvin.carlson@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rustyline = "4"
