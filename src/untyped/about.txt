@@ -1,0 +1,21 @@
+Untyped Lambda Calculus Interpreter
+
+The untyped lambda calculus is a model of computation capable of simulating
+any Turing machine, first introduced by Alonzo Church in the 1930s. It consists
+of lambda terms and two reduction rules called β-reduction and α-conversion.
+
+Learn more by running ?about <page>. Available Pages:
+  terms        for information on lambda terms.
+  substitute   for information on variable substitution.
+  alpha        for the definition of and examples of α-conversion.
+  beta         for the definition of and examples of β-reduction.
+  normal       for information on β-normal forms and normalization.
+  extra        for extra information and pages on untyped lambda calculus,
+               including the Church encodings of various data types.
+
+Interpreter Commands:
+?suppress            Prevents output from being written to the terminal.
+?unsuppress          Allows output to be written to the terminal.
+?show_intermediate   Enables printing of intermediate terms during β-reduction.
+?hide_intermediate   Disables printing of intermediate terms during β-reduction.
+?print [words...]    Acts like echo in shell.

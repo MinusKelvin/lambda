@@ -36,7 +36,7 @@ fn main() {
                     }
                 }
                 while !interpreter.evaluate(&line) {
-                    let prompt = " ".repeat(interpreter.prompt_len()) + " | ";
+                    let prompt = " ".repeat(interpreter.prompt_len()) + "| ";
                     match rl.readline(&prompt) {
                         Ok(newline) => {
                             line += &newline;

@@ -1,0 +1,22 @@
+The reduction rules of lambda calculus are defined using substitution.
+Substitution of the variable 𝑥 in a lambda term 𝑒 with another lambda term 𝑣 is
+denoted 𝑒[𝑥 := 𝑣].
+
+Substitution is not allowed to cause variables that are free in 𝑣 to become
+bound in 𝑒[𝑥 := 𝑣], as this changes the meaning of the function. For example,
+the substitution '(λx. y)[y := x]' would result in 'λx. x', but this is not
+allowed as x is free in 'x' but becomes bound in 'λx. x'. This can be avoided
+by applying α-conversion; see the page on α-conversion for more information.
+
+More formally, substitution obeys the following rewrite rules, in which 𝑥 and 𝑦
+are variables and 𝑒, 𝑣, and 𝑢 are lambda terms:
+𝑥[𝑥 := 𝑣] → 𝑣
+𝑦[𝑥 := 𝑣] → 𝑦   if 𝑥 ≠ 𝑦
+(𝑒 𝑢)[𝑥 := 𝑣] → 𝑒[𝑥 := 𝑣] 𝑢[𝑥 := 𝑣]
+(λ𝑥. 𝑒)[𝑥 := 𝑣] → λ𝑥. 𝑒
+(λ𝑦. 𝑒)[𝑥 := 𝑣] → λ𝑦. 𝑒[𝑥 := 𝑣]   if 𝑥 ≠ 𝑦 and 𝑦 is not free in 𝑣
+
+Since the '[𝑥 := 𝑣]' syntax is not part of the lambda calculus, it is not valid
+for a reduction to result in a term that contains a substitution that cannot be
+reduced using the above rules. Thankfully, in all such cases α-conversion can
+be applied to obtain a term that can be reduced using the above rules.

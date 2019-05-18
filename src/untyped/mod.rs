@@ -214,7 +214,7 @@ impl Interpreter {
         use crate::Interpreter;
         let mut input = String::new();
         let show_intermediate = self.show_intermediate;
-        let supress = self.suppress;
+        let suppress = self.suppress;
         for line in BufReader::new(from).lines() {
             if let Ok(line) = line {
                 input += &line;
@@ -224,7 +224,7 @@ impl Interpreter {
             }
         }
         self.show_intermediate = show_intermediate;
-        self.suppress = supress;
+        self.suppress = suppress;
     }
 }
 
@@ -236,8 +236,21 @@ impl crate::Interpreter for Interpreter {
         if command.starts_with("?") {
             let words: Vec<_> = command[1..].split_whitespace().collect();
             match words[0] {
-                "help" => {
-                    println!("{}", include_str!("help.txt"));
+                "about" => {
+                    println!("{}", if words.len() == 1 {
+                        include_str!("about.txt")
+                    } else {
+                        match words[1] {
+                            "terms" => include_str!("about/terms.txt"),
+                            "substitute" => include_str!("about/substitute.txt"),
+                            "alpha" => include_str!("about/alpha-conversion.txt"),
+                            "beta" => include_str!("about/beta-reduction.txt"),
+                            page => {
+                                println!("Unknown page: {}", page);
+                                return true
+                            }
+                        }
+                    });
                     true
                 }
                 "defs" => if words.len() > 1 {
@@ -449,7 +462,7 @@ fn parse_parens(
         skip_whitespace(chars);
         match chars.next() {
             Some(')') => Ok(term),
-            Some(c) => Err(ParseError::Failure(format!("Expected ), got {}", c))),
+            Some(c) => Err(ParseError::Failure(format!("Expected ) or a lambda term, got {}", c))),
             None => Err(ParseError::Unfinished)
         }
     } else {
@@ -475,7 +488,7 @@ fn parse_term(
                 parse_variable(chars, binders, globals)?,
                 chars, binders, globals
             ),
-        Some(&c) => Err(ParseError::Failure(format!("Unexpected {}", c))),
+        Some(&c) => Err(ParseError::Failure(format!("Expected a lambda term, got {}", c))),
         None => Err(ParseError::Unfinished)
     }
 }
@@ -494,7 +507,10 @@ fn parse_variable(
 
 fn resolve(name: &str, globals: &HashMap<String, Term>) -> Result<Term, ParseError> {
     globals.get(name).cloned().ok_or_else(
-        || ParseError::Failure(format!("No such variable: {}", name))
+        || ParseError::Failure(format!(
+            "This interpreter requires inputs to be closed, but {} is free in the input.",
+            name
+        ))
     )
 }
 
