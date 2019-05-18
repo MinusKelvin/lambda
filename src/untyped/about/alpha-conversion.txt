@@ -1,17 +1,23 @@
-The rule for α-conversion is:
-  (λx. m) -> (λy. m[x := y])
-where `y` does not appear in `m`
+α-conversion renames a variable bound by an abstraction and is used to avoid
+name collisions that would make substitutions invalid. There is a closely
+related concept called α-equivalence: two lambda terms are considered to be
+α-equivalent if α-conversion can be used to turn one into the other.
 
-An example of α-conversion:
-             < λx. λy. y x
-intermediate | λz. (λy. y x)[x := z]
-intermediate | λz. λy. (y x)[x := z]
-intermediate | λz. λy. y[x := z] x[x := z]
-α-conversion | λz. λy. y z
+Its rewrite rule, where 𝑥 and 𝑦 are variables and 𝑒 is a lambda term, is:
+λ𝑥. 𝑒 → λ𝑦. 𝑒[𝑥 := 𝑦]   if 𝑦 is not free in 𝑒
 
-An example of a case where α-conversion is required to avoid a name collision:
-             < (λx. λy. x) y
-α-conversion | (λx. λz. x) y
-β-reduction  | λz. y
-Without the alpha conversion, this would β-reduce to `λy. y`, which is incorrect
-and not α-equivalent to `λz. y`.
+An example of α-conversion is:
+< λx. λy. y x
+| λz. (λy. y x)[x := z]
+| λz. λy. (y x)[x := z]
+| λz. λy. y[x := z] x[x := z]
+> λz. λy. y z
+
+An example of when α-conversion is required to make a substitution possible:
+| (λx. y)[y := x]
+| (λz. y[x := z])[y := x]
+| (λz. y)[y := x]
+which can then be reduced:
+| (λz. y)[y := x]
+| λz. y[y := x]
+> λz. x

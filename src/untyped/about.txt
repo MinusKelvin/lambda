@@ -1,21 +1,20 @@
-Untyped Lambda Calculus Interpreter
-
 The untyped lambda calculus is a model of computation capable of simulating
 any Turing machine, first introduced by Alonzo Church in the 1930s. It consists
 of lambda terms and two reduction rules called β-reduction and α-conversion.
 
-Learn more by running ?about <page>. Available Pages:
-  terms        for information on lambda terms.
-  substitute   for information on variable substitution.
-  alpha        for the definition of and examples of α-conversion.
-  beta         for the definition of and examples of β-reduction.
-  normal       for information on β-normal forms and normalization.
-  extra        for extra information and pages on untyped lambda calculus,
-               including the Church encodings of various data types.
+This interpreter additionally supports two special commands that create names
+for terms: 'alias 𝑥 = 𝑒' and 'define 𝑥 = 𝑒'. 'alias' does no reduction on 𝑒, but
+'define' will reduce 𝑒 to a β-normal form before naming it. When input reduces
+to a term α-equivalent to some named terms, the names will output alongside the
+β-normal form.
 
-Interpreter Commands:
-?suppress            Prevents output from being written to the terminal.
-?unsuppress          Allows output to be written to the terminal.
-?show_intermediate   Enables printing of intermediate terms during β-reduction.
-?hide_intermediate   Disables printing of intermediate terms during β-reduction.
-?print [words...]    Acts like echo in shell.
+Learn more by running ?about <page>. Available Pages:
+terms        for information on lambda terms.
+substitute   for the definition of variable substitution.
+alpha        for the definition of and examples of α-conversion.
+beta         for the definition of and examples of β-reduction.
+normal       for information on β-normal forms and the normalization property.
+deBruijn     for information on De Bruijn indices.
+boolean      for information on Church booleans.
+numerals     for information on Church numerals.
+extra        for a list of extra interpreter commands this interpreter provides.

@@ -1,0 +1,9 @@
+Extra interpreter commands:
+?suppress            Prevents output from being written to the terminal. This
+                     is usually used in definition sets to hide output.
+?unsuppress          Allows output to be written to the terminal.
+?show_intermediate   Enables printing of intermediate terms during β-reduction.
+?hide_intermediate   Disables printing of intermediate terms during β-reduction.
+                     This is usually used in definition sets to hide output.
+?print [words...]    Acts like echo in shell. This is usually used in definition
+                     sets to provide extra information about its definitions.
