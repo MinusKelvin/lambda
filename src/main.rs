@@ -1,4 +1,5 @@
 mod untyped;
+mod simply_typed;
 
 use rustyline::Editor;
 use rustyline::error::ReadlineError;
@@ -29,6 +30,8 @@ fn main() {
                             match words[1] {
                                 "untyped" =>
                                     interpreter = Box::new(untyped::Interpreter::default()),
+                                "simply" =>
+                                    interpreter = Box::new(simply_typed::Interpreter::default()),
                                 v => println!("Unknown variant: {}", v)
                             }
                         }

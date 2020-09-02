@@ -1,9 +1,9 @@
 Lambda is a collection of interpreters of lambda calculi. We currently support
 the following variants:
 - Untyped lambda calculus (λ)
+- Simply-typed lambda calculus (λ→)
 
 We plan to support the following variants in the future:
-- Simply-typed lambda calculus (λ→)
 - System F (λ2)
 
 Use ?about to get information about the variant of lambda calculus you're using.

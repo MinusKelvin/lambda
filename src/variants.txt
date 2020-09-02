@@ -1,2 +1,3 @@
 Available variants:
 untyped (Untyped lambda calculus (λ))
+simple (Simply-typed lambda calculus (λ→))
