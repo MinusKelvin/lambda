@@ -4,7 +4,8 @@ pub struct Interpreter {
     globals: HashMap<String, Term>,
     names: HashMap<Term, Vec<String>>,
     show_intermediate: bool,
-    suppress: bool
+    suppress: bool,
+    limit: u64
 }
 
 #[derive(Clone, Debug, Eq)]
@@ -153,7 +154,7 @@ impl Interpreter {
         if self.show_intermediate && !self.suppress {
             println!(" < {}", &term);
         }
-        loop {
+        for _ in 0..self.limit {
             match term.reduce() {
                 Ok(new_term) => {
                     term = new_term;
@@ -166,6 +167,8 @@ impl Interpreter {
                 }
             }
         }
+        println!("{} iterations passed without reaching a normal form.", self.limit);
+        return term
     }
 
     fn def(&mut self, name: String, term: Term) {
@@ -245,6 +248,7 @@ impl crate::Interpreter for Interpreter {
                             "substitute" => include_str!("about/substitute.txt"),
                             "alpha" => include_str!("about/alpha-conversion.txt"),
                             "beta" => include_str!("about/beta-reduction.txt"),
+                            "extra" => include_str!("about/extra.txt"),
                             page => {
                                 println!("Unknown page: {}", page);
                                 return true
@@ -286,6 +290,10 @@ impl crate::Interpreter for Interpreter {
                         print!("{} ", w)
                     }
                     println!();
+                    true
+                }
+                "limit" => {
+                    self.limit = words[1].parse().unwrap_or(self.limit);
                     true
                 }
                 c => {
@@ -525,7 +533,8 @@ impl Default for Interpreter {
             globals: HashMap::new(),
             names: HashMap::new(),
             show_intermediate: true,
-            suppress: false
+            suppress: false,
+            limit: 10000
         }
     }
 }
