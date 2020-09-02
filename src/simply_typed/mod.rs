@@ -418,8 +418,10 @@ impl crate::Interpreter for Interpreter {
                     if !self.suppress {
                         if let Some((result, ty)) = result {
                             println!("  > {}", DisplayTerm(&result, &self.typenames));
-                            println!("  : {}", DisplayType(&ty, &self.typenames));
                             self.print_aliases(&result);
+                            println!("  : {}", DisplayType(&ty, &HashMap::new()));
+                            println!("  | = {}", DisplayType(&ty, &self.typenames));
+                            self.print_type_aliases(&ty);
                         } else {
                             println!("  > The input is improperly typed.");
                         }
